@@ -1,0 +1,25 @@
+import sys, os
+sys.path.insert(0,os.getcwd())
+
+from urllib.request import urlopen as uReq
+from bs4 import BeautifulSoup as soup
+from translate import Translator
+import json
+
+api_key="01grdocl45" 
+base_url = "https://api.railwayapi.com/v2/arrivals/station/ABC/hours/7/apikey/01grdocl45/"
+j=uReq(base_url)
+data = json.load(j)
+
+trains=data['trains']
+ans=""
+for train in trains:
+    ans+="Train number:" + train['number'] +"\n Train name:" + train['name'] +"\nScheduled arrival:"+train['scharr']+"\nExpected arrival:"+train['actarr']+"\nScheduled departure:" + train['schdep']+"\nActual departure:"+train['actdep']+"\n\n" 
+print(ans)
+
+#https://api.railwayapi.com/v2/arrivals/station/<stn code>/hours/<window period in hours>/apikey/<apikey>/
+
+
+
+
+
